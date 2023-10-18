@@ -1,5 +1,3 @@
-using NetDenetApp.Domain.Contracts;
-
 namespace AspNETWebApi
 {
     public class Product
