@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNETWebApi.Features.Product.Queries
 {
@@ -18,11 +19,11 @@ namespace AspNETWebApi.Features.Product.Queries
             _mapper = mapper;
         }
 
-        public Task<List<ProductsResponse>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<List<ProductsResponse>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = _context.Products.ToList();
+            var products = await _context.Products.ToListAsync();
             var mappedProducts = _mapper.Map<List<ProductsResponse>>(products);
-            return Task.FromResult(mappedProducts);
+            return await Task.FromResult(mappedProducts);
         }
     }
 }

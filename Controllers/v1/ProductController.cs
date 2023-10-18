@@ -12,9 +12,9 @@ namespace AspNETWebApi.Controllers.v1
         /// </summary>
         /// <returns>Status 200 OK</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var products = Mediator.Send(new GetAllProductsQuery());
+            var products = await _mediator.Send(new GetAllProductsQuery());
             return Ok(products);
         }
         /// <summary>
@@ -23,9 +23,9 @@ namespace AspNETWebApi.Controllers.v1
         /// <param name="id"></param>
         /// <returns>Status 200 Ok</returns>
         [HttpGet("{id}")]
-        public ActionResult<Product> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var product = Mediator.Send(new GetProductByIdQuery() { Id = id });
+            var product = await _mediator.Send(new GetProductByIdQuery() { Id = id });
             return Ok(product);
         }
     }

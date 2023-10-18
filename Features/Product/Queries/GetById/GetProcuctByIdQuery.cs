@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNETWebApi.Features.Product.Queries.GetById
 {
@@ -18,12 +19,11 @@ namespace AspNETWebApi.Features.Product.Queries.GetById
             _mapper = mapper;
         }
 
-        public Task<GetProductByIdResponse> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetProductByIdResponse> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var product = _context.Products.Where(p => p.Id == request.Id).FirstOrDefault();
-            if (product == null) throw new Exception("Böyle bir ürün bulunmamaktadır");
+            var product = await _context.Products.Where(p => p.Id == request.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken) ?? throw new Exception("Böyle bir ürün bulunmamaktadır");
             var mappedProduct = _mapper.Map<GetProductByIdResponse>(product);
-            return Task.FromResult(mappedProduct);
+            return await Task.FromResult(mappedProduct);
         }
     }
 }
