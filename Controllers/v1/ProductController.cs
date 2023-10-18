@@ -1,5 +1,6 @@
-using AspNETWebApi.Features.Product.Queries;
-using AspNETWebApi.Features.Product.Queries.GetById;
+using AspNETWebApi.Features.Products.Commands;
+using AspNETWebApi.Features.Products.Queries;
+using AspNETWebApi.Features.Products.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,27 @@ namespace AspNETWebApi.Controllers.v1
         {
             var product = await _mediator.Send(new GetProductByIdQuery() { Id = id });
             return Ok(product);
+        }
+
+        /// <summary>
+        /// Create/Update a Product
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns>Status 200 OK</returns>
+        [HttpPost]
+        public async Task<IActionResult> Post(CreateUpdateProductCommand command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+        /// <summary>
+        /// Delete Product By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Status 200 Ok</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok(await _mediator.Send(new DeleteProductCommand { Id = id}));
         }
     }
 
