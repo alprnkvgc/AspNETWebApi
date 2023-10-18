@@ -1,10 +1,8 @@
 ﻿using AspNETWebApi.Entities;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AspNETWebApi.Features.Products.Commands
 {
