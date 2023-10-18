@@ -21,7 +21,7 @@ namespace AspNETWebApi.Features.Product.Queries
 
         public async Task<List<ProductsResponse>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products.ToListAsync(cancellationToken: cancellationToken);
             var mappedProducts = _mapper.Map<List<ProductsResponse>>(products);
             return await Task.FromResult(mappedProducts);
         }
