@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using AspNETWebApi.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNETWebApi
 {
