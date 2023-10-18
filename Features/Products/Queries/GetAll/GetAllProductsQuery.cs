@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AspNETWebApi.Features.Product.Queries
+namespace AspNETWebApi.Features.Products.Queries
 {
     public class GetAllProductsQuery : IRequest<List<ProductsResponse>>
     {

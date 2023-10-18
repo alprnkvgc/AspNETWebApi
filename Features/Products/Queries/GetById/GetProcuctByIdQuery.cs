@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AspNETWebApi.Features.Product.Queries.GetById
+namespace AspNETWebApi.Features.Products.Queries.GetById
 {
     public class GetProductByIdQuery : IRequest<GetProductByIdResponse>
     {
@@ -21,7 +21,7 @@ namespace AspNETWebApi.Features.Product.Queries.GetById
 
         public async Task<GetProductByIdResponse> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var product = await _context.Products.Where(p => p.Id == request.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken) ?? throw new Exception("Böyle bir ürün bulunmamaktadır");
+            var product = await _context.Products.Where(p => p.Id == request.Id).FirstOrDefaultAsync(cancellationToken: cancellationToken) ?? throw new Exception("Product not found!");
             var mappedProduct = _mapper.Map<GetProductByIdResponse>(product);
             return await Task.FromResult(mappedProduct);
         }
