@@ -1,4 +1,5 @@
 ﻿using AspNETWebApi.Features.Product.Queries;
+using AspNETWebApi.Features.Product.Queries.GetById;
 using AutoMapper;
 
 namespace AspNETWebApi.Mappings
@@ -7,6 +8,7 @@ namespace AspNETWebApi.Mappings
     {
         public ProductProfile() {
             CreateMap<ProductsResponse, Product>().ReverseMap();
+            CreateMap<GetProductByIdResponse, Product>().ReverseMap();    
         }
     }
 }
