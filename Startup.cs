@@ -20,28 +20,22 @@ namespace AspNETWebApi
             services.AddCors();
             services.AddRouting();
             services.AddControllers();
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddAndConfigureApiVersioning();
+            services.ConfigureSwagger();
             services.AddAutoMapper(typeof(Program));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
-            services.AddApiVersioning(config =>
-            {
-                config.DefaultApiVersion = new ApiVersion(1, 0);
-                config.AssumeDefaultVersionWhenUnspecified = true;
-                config.ReportApiVersions = true;
-            });
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             app.UseCors();
-            app.UseRouting();
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger(provider);
             }
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
