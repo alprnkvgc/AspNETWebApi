@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNETWebApi.Controllers.v1
 {
+    [ApiVersion("1.0")]
+    [ApiController]
+    [Route("api/v1/[controller]")]
     public class ProductController : BaseApiController<ProductController>
     {
         /// <summary>
-        /// Get All Companies
+        /// Get All Products
         /// </summary>
         /// <returns>Status 200 OK</returns>
         [HttpGet]
